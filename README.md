@@ -1,4 +1,4 @@
-futil-js
-========
+futil
+=====
 
 Javascript Functional Utilities

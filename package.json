@@ -1,0 +1,29 @@
+{
+  "name": "futil",
+  "version": "0.0.1",
+  "description": "Javascript Functional Utilities",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joaonuno/futil-js.git"
+  },
+  "keywords": [
+    "functional",
+    "utilities",
+    "apply",
+    "call"
+  ],
+  "author": "João Nuno Silva <jnss81@gmail.com> (http://jnuno.com)",
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "1.14.0",
+    "sinon": "1.7.3",
+    "chai": "1.8.1"
+  },
+  "dependencies": {
+    "underscore": "1.x.x"
+  }
+}
