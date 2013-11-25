@@ -50,18 +50,6 @@ describe('futil', function () {
     });
   });
 
-  describe('call', function () {
-    it('should call the function with the given args', function () {
-      assert.equal(5, _.call(sum)(2, 3));
-    });
-  });
-
-  describe('call on', function () {
-    it('should call the function on the given context with the given args', function () {
-      assert.equal(5, _.call(sumUsingContext).on({b: 3})(2));
-    });
-  });
-
   describe('apply', function () {
     it('should apply the function with the given args', function () {
       assert.equal(5, _.apply(sum)([2, 3]));
@@ -71,6 +59,17 @@ describe('futil', function () {
   describe('apply on', function () {
     it('should apply the function on the given context with the given args', function () {
       assert.equal(5, _.apply(sumUsingContext).on({b: 3})([2]));
+    });
+  });
+
+  describe('dot and callWith', function () {
+    it('shoud get the function and call it with the given args', function () {
+      var joe = {
+        greet: function (greeting) {
+          return greeting + 'joe' + this.ending;
+        }
+      };
+      assert.equal('hello joe!', _.compose(_.callWith('hello ').on({ending: '!'}), _.dot('greet'))(joe));
     });
   });
 });
