@@ -24,6 +24,7 @@
     "chai": "1.8.1"
   },
   "dependencies": {
-    "underscore": "1.x.x"
+    "underscore": "1.x.x",
+    "funop": "0.0.1"
   }
 }

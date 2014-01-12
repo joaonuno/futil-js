@@ -1,6 +1,7 @@
 'use strict';
 
 var _ = require('underscore');
+var funop = require('funop');
 
 function allowContext(fn) {
   fn.on = function (ctx) {
@@ -9,21 +10,21 @@ function allowContext(fn) {
   return fn;
 }
 
-exports.callWith = function () {
+function callWith() {
   var args = _.toArray(arguments);
   return allowContext(function (fn) {
     return fn.apply(this, args);
   });
 };
 
-exports.applyWith = function () {
+function applyWith() {
   var args = _.toArray(arguments);
   return allowContext(function (fn) {
     return fn.apply(this, _.first(args));
   });
 };
 
-exports.apply = function (fn) {
+function apply(fn) {
   return allowContext(function () {
     return fn.apply(this, _.first(_.toArray(arguments)));
   });
@@ -44,19 +45,22 @@ function curryRecur(pattern, fn, args) {
 function curryAs(pattern, fn) {
   return curryRecur.call(this, pattern, fn, []);
 }
-exports.curryAs = curryAs;
-
-// Similar to bracket notation access.
-function at(obj, key) {
-  return obj[key];
-}
 
 function fixArgs(positions, fn) {
   return _.bind(function () {
-    var argsFixed = _.map(positions, _.partial(at, arguments));
+    var argsFixed = _.map(positions, _.partial(funop.at, arguments));
     return fn.apply(this, argsFixed);
   }, this);
 }
-exports.fixArgs = fixArgs;
 
-exports.dot = curryAs([1, 1], fixArgs([1, 0], at));
+// Module exports
+exports.callWith = callWith;
+exports.applyWith = applyWith;
+exports.apply = apply;
+exports.curryAs = curryAs;
+exports.eq = curryAs([1, 1], funop.equal);
+exports.not = _.partial(_.compose, funop.not);
+exports.fixArgs = fixArgs;
+exports.at = curryAs([1, 1], funop.at);
+exports.dot = curryAs([1, 1], fixArgs([1, 0], funop.at));
+exports.parseInt = curryAs([1, 1], fixArgs([1, 0], parseInt));

@@ -21,8 +21,29 @@ describe('futil', function () {
   }
 
   describe('dot', function () {
-    it('shoud get the property', function () {
+    it('should get the property', function () {
       assert.equal('value', _.dot('name')({name: 'value'}));
+    });
+  });
+
+  describe('eq', function () {
+    it('should compare by strict equality', function () {
+      assert.equal(true, _.eq(1)(1));
+      assert.equal(false, _.eq(1)(2));
+    });
+  });
+
+  describe('not', function () {
+    it('should negate the predicate', function () {
+      assert.equal(true, _.not(_.eq(1))(2));
+      assert.equal(false, _.not(_.eq(1))(1));
+    });
+  });
+
+  describe('parseInt', function () {
+    it('should correctly parse string for the given base', function () {
+      assert.equal(2, _.parseInt(10)("2"));
+      assert.equal(2, _.parseInt(2)("10"));
     });
   });
 
