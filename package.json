@@ -1,6 +1,6 @@
 {
   "name": "futil",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Javascript Functional Utilities",
   "main": "index.js",
   "scripts": {
